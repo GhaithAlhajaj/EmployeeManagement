@@ -1,0 +1,228 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - Employee Management</title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/EmployeeManagement.MVC.styles.css"
+          asp-append-version="true" />
+</head>
+
+<body>
+
+@if (User.Identity?.IsAuthenticated == true)
+{
+    <div class="app-wrapper">
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-brand">
+                <div class="brand-icon">
+                    <i class="bi bi-buildings"></i>
+                </div>
+
+                <div>
+                    <h5>PeopleHub</h5>
+                    <span>Management System</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <span class="sidebar-label">MAIN MENU</span>
+
+                <a asp-controller="Employees"
+                   asp-action="Index"
+                   class="sidebar-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Employees" ? "active" : "")">
+                    <i class="bi bi-people"></i>
+                    <span>Employees</span>
+                </a>
+
+                @if (User.IsInRole("Admin") || User.IsInRole("HR"))
+                {
+                    <a asp-controller="Home"
+                       asp-action="Index"
+                       class="sidebar-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                }
+
+                <a asp-controller="Account"
+                   asp-action="MyAccount"
+                   class="sidebar-link @(ViewContext.RouteData.Values["action"]?.ToString() == "MyAccount" ? "active" : "")">
+                    <i class="bi bi-person-circle"></i>
+                    <span>My account</span>
+                </a>
+
+                @if (User.IsInRole("Admin") || User.IsInRole("HR"))
+                {
+                    <a asp-controller="Departments"
+                       asp-action="Index"
+                       class="sidebar-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Departments" ? "active" : "")">
+                        <i class="bi bi-diagram-3"></i>
+                        <span>Departments</span>
+                    </a>
+                }
+            </div>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="sidebar-section">
+                    <span class="sidebar-label">ADMINISTRATION</span>
+
+                    <a asp-controller="Departments"
+                       asp-action="Create"
+                       class="sidebar-link">
+                        <i class="bi bi-plus-circle"></i>
+                        <span>Add Department</span>
+                    </a>
+
+                    <a asp-controller="Account"
+                       asp-action="CreateUser"
+                       class="sidebar-link @(ViewContext.RouteData.Values["action"]?.ToString() == "CreateUser" ? "active" : "")">
+                        <i class="bi bi-person-plus"></i>
+                        <span>Create User</span>
+                    </a>
+
+                    <a asp-controller="AuditLogs"
+                       asp-action="Index"
+                       class="sidebar-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "AuditLogs" ? "active" : "")">
+                        <i class="bi bi-clock-history"></i>
+                        <span>Audit history</span>
+                    </a>
+                </div>
+            }
+            else if (User.IsInRole("HR"))
+            {
+                <div class="sidebar-section">
+                    <span class="sidebar-label">MANAGEMENT</span>
+
+                    <a asp-controller="Account"
+                       asp-action="CreateUser"
+                       class="sidebar-link @(ViewContext.RouteData.Values["action"]?.ToString() == "CreateUser" ? "active" : "")">
+                        <i class="bi bi-person-plus"></i>
+                        <span>Create Employee</span>
+                    </a>
+                </div>
+            }
+
+            <div class="sidebar-bottom">
+                <div class="sidebar-user">
+                    <div class="user-avatar">
+                        @(User.Identity.Name?.Substring(0, 1).ToUpper())
+                    </div>
+
+                    <div class="user-info">
+                        <strong>@User.Identity.Name</strong>
+                        <span>
+                            @(User.IsInRole("Admin") ? "Administrator" :
+                              User.IsInRole("HR") ? "HR Manager" : "Employee")
+                        </span>
+                    </div>
+                </div>
+
+                <form asp-controller="Account"
+                      asp-action="Logout"
+                      method="post">
+                    @Html.AntiForgeryToken()
+
+                    <button type="submit" class="logout-button">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Sign Out</span>
+                    </button>
+                </form>
+            </div>
+
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-area">
+
+            <header class="topbar">
+                <div class="d-flex align-items-center gap-3">
+                    <button class="sidebar-toggle"
+                            type="button"
+                            id="sidebarToggle"
+                            aria-label="Toggle navigation">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <div>
+                        <h6 class="topbar-title">
+                            @ViewData["Title"]
+                        </h6>
+                        <span class="topbar-subtitle">
+                            Employee Management System
+                        </span>
+                    </div>
+                </div>
+
+                <div class="topbar-right">
+                    <div class="topbar-date">
+                        <i class="bi bi-calendar3"></i>
+                        @DateTime.Now.ToString("dd MMM yyyy")
+                    </div>
+
+                    <div class="topbar-avatar">
+                        @(User.Identity.Name?.Substring(0, 1).ToUpper())
+                    </div>
+                </div>
+            </header>
+
+            <main class="page-content">
+                @RenderBody()
+            </main>
+
+            <footer class="app-footer">
+                <span>© 2026 PeopleHub. All rights reserved.</span>
+                <a asp-controller="Home" asp-action="Privacy">
+                    Privacy Policy
+                </a>
+            </footer>
+
+        </div>
+    </div>
+}
+else
+{
+    <main class="auth-layout">
+        @RenderBody()
+    </main>
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggle = document.getElementById("sidebarToggle");
+        const sidebar = document.getElementById("sidebar");
+
+        if (toggle && sidebar) {
+            toggle.addEventListener("click", function () {
+                sidebar.classList.toggle("sidebar-open");
+            });
+        }
+    });
+</script>
+
+@await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

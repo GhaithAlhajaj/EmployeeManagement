@@ -1,0 +1,4 @@
+Role	Email	Password
+Admin	admin@example.com	Admin@12345
+HR	hr@example.com	HrManager@123
+Employee	employee@example.com	Employee@123

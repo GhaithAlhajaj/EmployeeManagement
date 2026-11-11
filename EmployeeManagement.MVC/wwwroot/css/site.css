@@ -1,0 +1,378 @@
+
+:root {
+    --primary: #4f46e5;
+    --primary-light: #eef2ff;
+    --sidebar-bg: #111827;
+    --sidebar-text: #9ca3af;
+    --background: #f8fafc;
+    --surface: #ffffff;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --border: #e5e7eb;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Main Layout */
+
+.app-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+
+.sidebar {
+    width: 260px;
+    min-width: 260px;
+    background: var(--sidebar-bg);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 16px;
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 1000;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 10px 32px;
+    border-bottom: 1px solid #273244;
+}
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+    background: var(--primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+}
+
+.sidebar-brand h5 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.sidebar-brand span {
+    font-size: 11px;
+    color: var(--sidebar-text);
+}
+
+.sidebar-section {
+    margin-top: 30px;
+}
+
+.sidebar-label {
+    display: block;
+    padding: 0 12px;
+    margin-bottom: 12px;
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 12px 14px;
+    margin-bottom: 5px;
+    color: var(--sidebar-text);
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.sidebar-link i {
+    font-size: 17px;
+}
+
+.sidebar-link:hover {
+    background: #1f2937;
+    color: white;
+}
+
+.sidebar-link.active {
+    background: var(--primary);
+    color: white;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid #273244;
+}
+
+.sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px 5px 15px;
+}
+
+.user-avatar,
+.topbar-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #312e81;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.user-info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info strong {
+    color: white;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.user-info span {
+    color: var(--sidebar-text);
+    font-size: 11px;
+}
+
+.logout-button {
+    width: 100%;
+    padding: 10px 12px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #fca5a5;
+    text-align: left;
+    font-size: 13px;
+    transition: background 0.2s;
+}
+
+.logout-button:hover {
+    background: #3b2027;
+}
+
+.logout-button i {
+    margin-right: 9px;
+}
+
+/* Main Area */
+
+.main-area {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Topbar */
+
+.topbar {
+    height: 76px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topbar-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 3px;
+}
+
+.topbar-subtitle {
+    color: var(--text-secondary);
+    font-size: 11px;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.topbar-date {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.topbar-date i {
+    margin-right: 6px;
+}
+
+.topbar-avatar {
+    background: var(--primary);
+    width: 36px;
+    height: 36px;
+}
+
+.sidebar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--text-primary);
+}
+
+/* Page Content */
+
+.page-content {
+    flex: 1;
+    padding: 32px 35px;
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Footer */
+
+.app-footer {
+    padding: 18px 35px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-secondary);
+    font-size: 11px;
+}
+
+.app-footer a {
+    color: var(--primary);
+}
+
+/* General UI Improvements */
+
+.card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+}
+
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 8px 15px;
+}
+
+.btn-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover {
+    background: #4338ca;
+    border-color: #4338ca;
+}
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+    border-color: #d1d5db;
+    padding: 10px 12px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+.table {
+    vertical-align: middle;
+}
+
+.table thead th {
+    background: #f8fafc;
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 14px;
+}
+
+.table tbody td {
+    padding: 14px;
+    border-color: var(--border);
+}
+
+/* Authentication Pages */
+
+.auth-layout {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    background: linear-gradient(135deg, #eef2ff, #f8fafc);
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+    }
+
+    .sidebar.sidebar-open {
+        transform: translateX(0);
+    }
+
+    .main-area {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .sidebar-toggle {
+        display: block;
+    }
+
+    .topbar {
+        padding: 0 18px;
+    }
+
+    .page-content {
+        padding: 22px 16px;
+    }
+
+    .topbar-date {
+        display: none;
+    }
+
+    .app-footer {
+        padding: 15px;
+    }
+}

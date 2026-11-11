@@ -1,0 +1,48 @@
+﻿# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build output
+**/bin/
+**/obj/
+TestResults/
+**/TestResults/
+build.log
+
+# IDE
+.idea/
+.vscode/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# Local configuration and secrets
+**/appsettings.Development.json
+**/appsettings.Local.json
+.env
+.env.*
+!.env.example
+secrets.json
+
+# Certificates and keys
+*.pfx
+*.p12
+*.key
+*.pem
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+
+# Personal credentials
+test accounts.txt
